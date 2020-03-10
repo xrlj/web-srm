@@ -1,0 +1,132 @@
+<nz-layout class="app-layout">
+  <nz-sider class="menu-sidebar"
+            nzCollapsible
+            nzWidth="256px"
+            nzBreakpoint="md"
+            [(nzCollapsed)]="isCollapsed"
+            [nzTrigger]="null">
+    <div class="sidebar-logo">
+      <a href="https://ng.ant.design/" target="_blank">
+        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+        <h1>供应链协同</h1>
+      </a>
+    </div>
+    <ul nz-menu [nzTheme]="theme ? 'dark' : 'light'" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <ng-container  *ngFor="let menu of menus">
+        <ng-container *ngIf="menu.children && menu.children.length > 0; else withoutChild">
+          <li nz-submenu [(nzOpen)]="openMap[menu.title]" (nzOpenChange)="openHandler(menu.title)">
+            <span title>
+              <i nz-icon [nzType]="menu.icon"></i>
+              <span>{{ menu.title }}</span>
+            </span>
+
+            <ul>
+              <ng-container *ngFor="let child of menu.children">
+                <ng-container *ngIf="child.children  && child.children.length > 0; else withoutSubChild">
+                  <li nz-submenu>
+                    <span title>{{ child.title }}</span>
+                    <ul *ngFor="let subchild of child.children">
+                      <li nz-menu-item>
+                        <a [routerLink]="subchild.link">
+                          <span title>{{ subchild.title }}</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                </ng-container>
+
+                <ng-template #withoutSubChild>
+                  <li nz-menu-item>
+                    <a [routerLink]="child.link">
+                      <span title>{{ child.title }}</span>
+                    </a>
+                  </li>
+                </ng-template>
+              </ng-container>
+            </ul>
+          </li>
+        </ng-container>
+
+        <ng-template #withoutChild>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="menu.link">
+              <span title>
+                <i nz-icon [nzType]="menu.icon"></i>
+                <span>{{ menu.title }}</span>
+              </span>
+            </a>
+          </li>
+        </ng-template>
+      </ng-container>
+      <!--<ng-container>
+        <ng-container>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['/', 'pages', 'dashboard']">
+             <span title>
+                <i nz-icon nzType="home"></i>
+                <span>首页</span>
+              </span>
+            </a>
+          </li>
+          <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
+            <ul>
+              <li nz-menu-item nzMatchRouter>
+                <a routerLink="/pages/welcome">Welcome</a>
+              </li>
+              <li nz-menu-item nzMatchRouter>
+                <a [routerLink]="['/', 'pages', 'dashboard']">首页</a>
+              </li>
+              <li nz-menu-item nzMatchRouter>
+                <a [routerLink]="['/', 'pages', 'login']">WorkSpace</a>
+              </li>
+            </ul>
+          </li>
+          <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
+            <ul>
+              <li nz-menu-item nzMatchRouter>
+                <a>Basic Form</a>
+              </li>
+            </ul>
+          </li>
+        </ng-container>
+      </ng-container>-->
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="app-header">
+        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+            <i class="trigger"
+               nz-icon
+               [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+            ></i>
+        </span>
+      </div>
+      <div class="user">
+        <nz-dropdown [nzPlacement]="'bottomRight'">
+          <div nz-dropdown class="user-name">
+            <nz-avatar nzIcon="user"></nz-avatar>
+            <span>超级管理员</span>
+          </div>
+
+          <ul nz-menu nzSelectable>
+            <li nz-menu-item>
+              <a>个人中心</a>
+            </li>
+            <li nz-menu-item>
+              <a>修改密码</a>
+            </li>
+            <li nz-menu-item>
+              <a (click)="logout()">退出登录</a>
+            </li>
+          </ul>
+        </nz-dropdown>
+      </div>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>
