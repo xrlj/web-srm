@@ -4,8 +4,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import {WelcomeComponent} from './welcome/welcome.component';
 import {LoginComponent} from './login/login.component';
 import {BlankComponent, DefaultComponent} from '../theme/layouts';
-import {InitComponent} from "./init/init.component";
-import {DashboardComponent} from "./dashboard/dashboard.component";
+import {InitComponent} from './init/init.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {

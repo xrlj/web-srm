@@ -20,6 +20,7 @@
               <span>{{ menu.title }}</span>
             </span>
 
+            <!--子菜单-->
             <ul>
               <ng-container *ngFor="let child of menu.children">
                 <ng-container *ngIf="child.children  && child.children.length > 0; else withoutSubChild">
@@ -47,6 +48,7 @@
           </li>
         </ng-container>
 
+        <!--没有子菜单的处理-->
         <ng-template #withoutChild>
           <li nz-menu-item nzMatchRouter>
             <a [routerLink]="menu.link">
@@ -58,42 +60,10 @@
           </li>
         </ng-template>
       </ng-container>
-      <!--<ng-container>
-        <ng-container>
-          <li nz-menu-item nzMatchRouter>
-            <a [routerLink]="['/', 'pages', 'dashboard']">
-             <span title>
-                <i nz-icon nzType="home"></i>
-                <span>首页</span>
-              </span>
-            </a>
-          </li>
-          <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
-            <ul>
-              <li nz-menu-item nzMatchRouter>
-                <a routerLink="/pages/welcome">Welcome</a>
-              </li>
-              <li nz-menu-item nzMatchRouter>
-                <a [routerLink]="['/', 'pages', 'dashboard']">首页</a>
-              </li>
-              <li nz-menu-item nzMatchRouter>
-                <a [routerLink]="['/', 'pages', 'login']">WorkSpace</a>
-              </li>
-            </ul>
-          </li>
-          <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
-            <ul>
-              <li nz-menu-item nzMatchRouter>
-                <a>Basic Form</a>
-              </li>
-            </ul>
-          </li>
-        </ng-container>
-      </ng-container>-->
     </ul>
   </nz-sider>
   <nz-layout>
-    <nz-header>
+    <!--<nz-header>
       <div class="app-header">
         <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
             <i class="trigger"
@@ -102,27 +72,7 @@
             ></i>
         </span>
       </div>
-      <div class="user">
-        <nz-dropdown [nzPlacement]="'bottomRight'">
-          <div nz-dropdown class="user-name">
-            <nz-avatar nzIcon="user"></nz-avatar>
-            <span>超级管理员</span>
-          </div>
-
-          <ul nz-menu nzSelectable>
-            <li nz-menu-item>
-              <a>个人中心</a>
-            </li>
-            <li nz-menu-item>
-              <a>修改密码</a>
-            </li>
-            <li nz-menu-item>
-              <a (click)="logout()">退出登录</a>
-            </li>
-          </ul>
-        </nz-dropdown>
-      </div>
-    </nz-header>
+    </nz-header>-->
     <nz-content>
       <div class="inner-content">
         <router-outlet></router-outlet>

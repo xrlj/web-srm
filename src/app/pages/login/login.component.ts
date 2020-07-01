@@ -41,7 +41,9 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
 
-    const body: VLoginReq = {
+    this.router.navigateByUrl(AppPath.pages);
+
+    /*const body: VLoginReq = {
       username: this.validateForm.value.username,
       password: this.validateForm.value.password,
       clientid: environment.clientId,
@@ -54,7 +56,7 @@ export class LoginComponent implements OnInit {
       this.uiHelper.msgTipError(error.msg);
     }).final(() => {
       this.isLoadingOne = false;
-    });
+    });*/
   }
 
   clearUsername() {

@@ -14,8 +14,8 @@ export class DefaultComponent implements OnInit {
   // 控制目录的展开/折叠
   isCollapsed = false;
 
-  // menus = APP_MENUS;
-  menus: VMenuResp[];
+  menus = APP_MENUS;
+  // menus: VMenuResp[];
   theme  = true;  // 主题
   openMap: { [name: string]: boolean } = {};  // 类似hashMap
 
@@ -23,7 +23,7 @@ export class DefaultComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.menus = JSON.parse(localStorage.getItem(Constants.localStorageKey.menus));
+    // this.menus = JSON.parse(localStorage.getItem(Constants.localStorageKey.menus));
     this.initOpenMap();
   }
 
@@ -54,5 +54,9 @@ export class DefaultComponent implements OnInit {
    */
   changeTheme() {
     this.theme  = false;
+  }
+
+  logout() {
+    console.log('退出……');
   }
 }
