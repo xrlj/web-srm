@@ -1,82 +1,12 @@
-<nz-layout class="app-layout">
-  <nz-sider class="menu-sidebar"
-            nzCollapsible
-            nzWidth="256px"
-            nzBreakpoint="md"
-            [(nzCollapsed)]="isCollapsed"
-            [nzTrigger]="null">
-    <div class="sidebar-logo">
-      <a href="https://ng.ant.design/" target="_blank">
-        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-        <h1>供应链协同</h1>
-      </a>
-    </div>
-    <ul nz-menu [nzTheme]="theme ? 'dark' : 'light'" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <ng-container  *ngFor="let menu of menus">
-        <ng-container *ngIf="menu.children && menu.children.length > 0; else withoutChild">
-          <li nz-submenu [(nzOpen)]="openMap[menu.title]" (nzOpenChange)="openHandler(menu.title)">
-            <span title>
-              <i nz-icon [nzType]="menu.icon"></i>
-              <span>{{ menu.title }}</span>
-            </span>
+<nz-spin [nzSpinning]="isSpinning" nzTip="努力加载中...">
+  <div class="default-layout" [class.aside-collapsed]="collapsed">
+    <app-header></app-header>
+    <app-body></app-body>
+    <app-aside
+      [collapsed]="collapsed"
+      (toggleCollapsed)="onToggleCollapsed($event)"
+    ></app-aside>
+    <app-footer></app-footer>
+  </div>
+</nz-spin>
 
-            <!--子菜单-->
-            <ul>
-              <ng-container *ngFor="let child of menu.children">
-                <ng-container *ngIf="child.children  && child.children.length > 0; else withoutSubChild">
-                  <li nz-submenu>
-                    <span title>{{ child.title }}</span>
-                    <ul *ngFor="let subchild of child.children">
-                      <li nz-menu-item>
-                        <a [routerLink]="subchild.link">
-                          <span title>{{ subchild.title }}</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                </ng-container>
-
-                <ng-template #withoutSubChild>
-                  <li nz-menu-item>
-                    <a [routerLink]="child.link">
-                      <span title>{{ child.title }}</span>
-                    </a>
-                  </li>
-                </ng-template>
-              </ng-container>
-            </ul>
-          </li>
-        </ng-container>
-
-        <!--没有子菜单的处理-->
-        <ng-template #withoutChild>
-          <li nz-menu-item nzMatchRouter>
-            <a [routerLink]="menu.link">
-              <span title>
-                <i nz-icon [nzType]="menu.icon"></i>
-                <span>{{ menu.title }}</span>
-              </span>
-            </a>
-          </li>
-        </ng-template>
-      </ng-container>
-    </ul>
-  </nz-sider>
-  <nz-layout class="right-layout">
-    <nz-header>
-      <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-            <i class="trigger"
-               nz-icon
-               [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-            ></i>
-        </span>
-      </div>
-    </nz-header>
-    <nz-content>
-      <div class="inner-content">
-        <router-outlet></router-outlet>
-      </div>
-    </nz-content>
-  </nz-layout>
-</nz-layout>
