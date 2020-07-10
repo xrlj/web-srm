@@ -128,8 +128,7 @@
             ],
             "styles": [
               "src/styles.less",
-              "src/assets/styles/global.less",
-              "src/assets/styles/theme-default.less"
+              "src/assets/styles/global.less"
             ],
             "scripts": []
           }
@@ -162,5 +161,8 @@
       }
     }
   },
-  "defaultProject": "web-srm"
+  "defaultProject": "web-srm",
+  "cli": {
+    "analytics": false
+  }
 }

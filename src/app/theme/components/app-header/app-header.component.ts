@@ -50,17 +50,19 @@ export class AppHeaderComponent implements OnInit {
   }
 
   /*更改主题*/
-  changeTheme() {
+  changeTheme(theme: string) {
 
     // the theme to which should be switched
-    this.theme = this.theme === 'dark' ? '' : 'dark';
+    // this.theme = this.theme === 'dark' ? '' : 'dark';
 
 
     // theme url to which should be switched
     let themeUrl = './assets/themes/default.css';
 
-    if (this.theme === 'dark') {
-      themeUrl = './assets/themes/dark.css';
+    if (theme === 'dark') {
+      themeUrl = './assets/themes/style.dark.css';
+    } else {
+      themeUrl = './assets/themes/style.default.css';
     }
 
     // create new link element
